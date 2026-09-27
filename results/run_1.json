@@ -1,0 +1,26 @@
+[
+  {
+    "test_id": "TC-001",
+    "question": "What is your refund policy?",
+    "expected_answer": "We offer a full refund if you request it within 30 days of purchase, as long as the item is unused and in its original condition.",
+    "actual_response": "I don't have the details of a specific refund policy available to me right now, so I don't want to guess and risk giving you wrong information \u2014 especially since refund windows and conditions can vary quite a bit.\n\nHere's how to get an accurate answer:\n\n- **Check your order confirmation email or receipt** \u2014 refund terms are usually linked there.\n- **Look for \"Returns\" or \"Refund Policy\"** in the website footer.\n- **Have your order number handy** if you contact support directly, as policies can differ by product type or purchase date.\n\nIf you can tell me more about what you purchased and where, I'm happy to help you think through your options or draft a message to the seller.",
+    "passed": false,
+    "reason": "The response declines to state the policy and omits the key facts (30-day window, full refund, unused/original condition)."
+  },
+  {
+    "test_id": "TC-002",
+    "question": "How do I cancel my account?",
+    "expected_answer": "You can cancel your account anytime from the Account Settings page by clicking 'Cancel Account'. Your data will be deleted within 30 days of cancellation.",
+    "actual_response": "Happy to help with that. Since I don't have your account details in front of me, could you let me know which account or service you're looking to cancel? That way I can point you in the right direction.\n\nIn the meantime, here's the general process that applies to most accounts:\n\n1. **Log in** to your account on the website (cancellation usually isn't available in mobile apps, especially if you subscribed through the App Store or Google Play).\n2. Go to **Settings \u2192 Account** or **Billing/Subscription**.\n3. Look for **Cancel subscription**, **Close account**, or **Manage plan**.\n4. Follow the prompts and **save the confirmation email** as proof.\n\nA few things worth knowing:\n\n- **If you subscribed through Apple or Google**, you must cancel through their subscription settings, not through us \u2014 canceling in the app alone won't stop the billing.\n- **Timing:** Canceling usually stops future charges but doesn't refund the current period, so you'll typically keep access until the end of your billing cycle.\n- **Download",
+    "passed": false,
+    "reason": "The response gives only generic cancellation guidance and asks for clarification, omitting the specific 'Cancel Account' option in Account Settings and the 30-day data deletion detail."
+  },
+  {
+    "test_id": "TC-003",
+    "question": "How long does shipping usually take?",
+    "expected_answer": "Standard shipping typically takes 3 to 5 business days, while express shipping takes 1 to 2 business days.",
+    "actual_response": "I don't have your order details or this store's specific shipping policy in front of me, so I don't want to quote you a timeframe that turns out to be wrong.\n\nA couple of ways I can help:\n\n- **If you've already ordered:** Share your order number and I can look up the status and estimated delivery.\n- **If you haven't ordered yet:** The exact timeframes should be listed at checkout or on the store's Shipping & Delivery page, since they vary by destination and sh",
+    "passed": false,
+    "reason": "The response declines to give any timeframe and asks for more info, omitting the expected 3\u20135 business day standard and 1\u20132 day express shipping facts."
+  }
+]

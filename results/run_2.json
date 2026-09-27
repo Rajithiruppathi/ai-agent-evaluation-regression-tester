@@ -1,0 +1,26 @@
+[
+  {
+    "test_id": "TC-001",
+    "question": "What is your refund policy?",
+    "expected_answer": "We offer a full refund if you request it within 30 days of purchase, as long as the item is unused and in its original condition.",
+    "actual_response": "I don't have the details of this company's refund policy, so I don't want to guess \u2014 giving you inaccurate terms could cause real problems if you relied on them.\n\nHere's how to get an accurate answer:\n\n- **Check the website** \u2014 refund and return policies are usually linked in the footer or under \"Help\"/\"Support\"\n- **Look at your order confirmation email** \u2014 it often includes return terms and deadlines\n- **Contact the support team directly** \u2014 they can also look up your specific order\n\nIf you can share the policy details, I'm glad to help you interpret them or figure out whether your situation qualifies. And if you tell me more about what happened \u2014 a damaged item, a change of mind, a late delivery \u2014 I can suggest what to ask for and how to frame your request.",
+    "passed": false,
+    "reason": "The response declines to state the refund policy and provides none of the expected facts (30-day window, unused/original condition, full refund)."
+  },
+  {
+    "test_id": "TC-002",
+    "question": "How do I cancel my account?",
+    "expected_answer": "You can cancel your account anytime from the Account Settings page by clicking 'Cancel Account'. Your data will be deleted within 30 days of cancellation.",
+    "actual_response": "I want to be upfront: I don't have access to your account details or the specifics of this service's cancellation process, so I can't walk you through the exact steps. Here's what I can offer:\n\n**Where to look:**\n- Sign in and check **Settings \u2192 Account** or **Billing/Subscription** \u2014 cancellation is usually there\n- Look for a \"Help\" or \"Support\" link in the site footer, which often has a cancellation article\n- Check the confirmation email from when you signed up; it frequently includes account management links\n\n**Two things that commonly catch people out:**\n- Deleting",
+    "passed": false,
+    "reason": "The response disclaims knowledge and gives only generic guesses, omitting the specific 'Cancel Account' option in Account Settings and the 30-day data deletion detail."
+  },
+  {
+    "test_id": "TC-003",
+    "question": "How long does shipping usually take?",
+    "expected_answer": "Standard shipping typically takes 3 to 5 business days, while express shipping takes 1 to 2 business days.",
+    "actual_response": "Happy to help! Shipping times depend on a few things \u2014 where you're located, which shipping option you picked at checkout, and whether the item is in stock.\n\nAs a general guide, standard domestic shipping usually lands in the 3\u20137 business day range, expedited is typically 1\u20133, and international can take 1\u20133 weeks depending on customs. But I don't want to quote you a timeline that turns out to be wrong for your specific order.\n\nIf you can tell me:\n- Your order number (or the email you ordered with), and\n- Where it's shipping to\n\n...I can look up the exact estimate. Or if you haven't ordered yet, the delivery options and timeframes for your address will show at checkout before you pay.",
+    "passed": false,
+    "reason": "The response gives different shipping timeframes (3\u20137 days standard, 1\u20133 expedited) than the expected 3\u20135 standard and 1\u20132 express, so the key facts do not match."
+  }
+]
