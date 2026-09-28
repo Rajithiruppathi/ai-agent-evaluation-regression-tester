@@ -1,0 +1,85 @@
+name: Claude PR Code Review
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+    branches:
+      - main
+
+jobs:
+  review:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Get PR Diff
+        id: diff
+        run: |
+          git diff origin/${{ github.base_ref }}...HEAD > pr_diff.patch
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install Anthropic SDK
+        run: pip install anthropic
+
+      - name: Run Claude Review
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+        run: |
+          python -c '
+          import os, json, anthropic, urllib.request
+
+          api_key = os.environ["ANTHROPIC_API_KEY"]
+          gh_token = os.environ["GITHUB_TOKEN"]
+          pr_num = os.environ["PR_NUMBER"]
+          repo = os.environ["GITHUB_REPOSITORY"]
+
+          with open("pr_diff.patch", "r") as f:
+              diff_text = f.read()
+
+          client = anthropic.Anthropic(api_key=api_key)
+
+          prompt = f"""You are a senior staff software engineer reviewing a pull request before merging to main.
+          Analyze the following git diff and highlight:
+          1. Potential bugs, regressions, or breaking changes
+          2. Unhandled edge cases or missing error handling
+          3. Performance risks or bad practices
+
+          Keep your summary concise, action-oriented, and structured with key headings.
+
+          Git Diff:
+          {diff_text[:30000]}
+          """
+
+          response = client.messages.create(
+              model="claude-3-7-sonnet-20250219",
+              max_tokens=1000,
+              messages=[{"role": "user", "content": prompt}]
+          )
+
+          review_comment = response.content[0].text
+
+          url = f"https://api.github.com/repos/{repo}/issues/{pr_num}/comments"
+          req = urllib.request.Request(
+              url,
+              data=json.dumps({"body": f"### 🤖 Claude Code Review\n\n{review_comment}"}).encode("utf-8"),
+              headers={
+                  "Authorization": f"Bearer {gh_token}",
+                  "Accept": "application/vnd.github.v3+json",
+                  "Content-Type": "application/json"
+              }
+          )
+          urllib.request.urlopen(req)
+          '
