@@ -7,6 +7,7 @@ import sys
 import anthropic
 from dotenv import load_dotenv
 
+from app_under_test import generate_response
 from evaluator import evaluate_response
 
 sys.stdout.reconfigure(encoding="utf-8")  # type: ignore[union-attr]
@@ -15,16 +16,6 @@ sys.stdout.reconfigure(encoding="utf-8")  # type: ignore[union-attr]
 def load_test_cases(path: str = "test_cases.json") -> list[dict]:
     with open(path, "r", encoding="utf-8") as f:
         return json.load(f)
-
-
-def get_actual_response(client, question: str) -> str:
-    response = client.messages.create(
-        model="claude-opus-5",
-        max_tokens=512,
-        system="You are a helpful customer support assistant. Answer the customer's question clearly and briefly.",
-        messages=[{"role": "user", "content": question}],
-    )
-    return next(block.text for block in response.content if block.type == "text")
 
 
 def get_next_run_path(results_dir: str = "results") -> str:
@@ -54,15 +45,15 @@ def main():
     if not api_key:
         raise RuntimeError("ANTHROPIC_API_KEY is not set. Add it to your .env file.")
 
-    client = anthropic.Anthropic(api_key=api_key)
+    judge_client = anthropic.Anthropic(api_key=api_key)
 
     test_cases = load_test_cases()
     run_results = []
 
     for case in test_cases:
-        actual_response = get_actual_response(client, case["question"])
+        actual_response = generate_response(case["question"])
         result = evaluate_response(
-            client,
+            judge_client,
             question=case["question"],
             expected_answer=case["expected_answer"],
             actual_response=actual_response,

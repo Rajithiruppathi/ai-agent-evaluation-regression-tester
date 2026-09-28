@@ -1,0 +1,26 @@
+[
+  {
+    "test_id": "TC-001",
+    "question": "What is your refund policy?",
+    "expected_answer": "We offer a full refund if you request it within 30 days of purchase, as long as the item is unused and in its original condition.",
+    "actual_response": "I don't have the specific refund policy details for this company available to me, so I don't want to quote terms that might be wrong \u2014 a misremembered deadline or condition could cost you a refund you're actually entitled to.\n\nYou'll find the authoritative version in a few places:\n- Your order confirmation email or receipt\n- The \"Refunds,\" \"Returns,\" or \"Terms of Service\" page on the website\n- The help center or",
+    "passed": false,
+    "reason": "The response declines to state any policy and omits the key facts (30-day window, unused/original condition, full refund) in the expected answer."
+  },
+  {
+    "test_id": "TC-002",
+    "question": "How do I cancel my account?",
+    "expected_answer": "You can cancel your account anytime from the Account Settings page by clicking 'Cancel Account'. Your data will be deleted within 30 days of cancellation.",
+    "actual_response": "I can help point you in the right direction \u2014 though I should mention I don't have access to your account details or know which service you're asking about, so I can't pull up the exact steps for you.\n\nIn general, cancellation usually works one of these ways:\n\n- **In your account settings** \u2014 look for \"Account,\" \"Billing,\" or \"Subscription,\" then a cancel or close option.\n- **Through the app store** \u2014 if you signed up via the Apple App Store or Google Play, you'll need to cancel the subscription there, not in the app itself.\n- **By contacting support directly** \u2014 some services require an email or chat request to close an account.\n\nTwo things worth knowing: deleting an app doesn't stop billing on its own,",
+    "passed": false,
+    "reason": "The response gives only generic cancellation advice and omits the specific Account Settings 'Cancel Account' step and the 30-day data deletion detail."
+  },
+  {
+    "test_id": "TC-003",
+    "question": "How long does shipping usually take?",
+    "expected_answer": "Standard shipping typically takes 3 to 5 business days, while express shipping takes 1 to 2 business days.",
+    "actual_response": "I don't have access to our specific shipping policies or your order details, so I don't want to give you a timeframe that might be wrong.\n\nA few ways to get an accurate answer:\n\n- **Check your order confirmation email** \u2014 it usually lists the estimated delivery window and any tracking info.\n- **Look at the Shipping & Delivery page** on our website for standard timeframes by method and destination.\n\nIf you can share your order number and destination (or just tell me which shipping option you chose), I'm happy to help you dig into it further. Also worth noting that customs processing, holidays, and carrier delays can add time beyond the original estimate.",
+    "passed": false,
+    "reason": "The response declines to provide any timeframe and omits the expected 3-5 business day standard and 1-2 business day express shipping details."
+  }
+]
