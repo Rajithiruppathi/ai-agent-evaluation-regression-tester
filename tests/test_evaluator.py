@@ -1,3 +1,5 @@
+import json
+
 import pytest
 from pydantic import ValidationError
 
@@ -69,14 +71,40 @@ def test_evaluate_response_parses_valid_judge_output():
     assert result.reason == "Meaning matches."
 
 
+def _judge(raw_text):
+    return evaluate_response(
+        _FakeClient(raw_text),
+        question="Irrelevant",
+        expected_answer="Irrelevant",
+        actual_response="Irrelevant",
+    )
+
+
 def test_evaluate_response_rejects_invalid_structured_output():
     # "passed" is not a valid boolean value -> pydantic should reject it
-    fake_client = _FakeClient('{"passed": "banana", "reason": "bad output"}')
-
     with pytest.raises(ValidationError):
-        evaluate_response(
-            fake_client,
-            question="Irrelevant",
-            expected_answer="Irrelevant",
-            actual_response="Irrelevant",
-        )
+        _judge('{"passed": "banana", "reason": "bad output"}')
+
+
+def test_evaluate_response_accepts_json_fenced_output():
+    result = _judge('```json\n{"passed": true, "reason": "Fenced JSON."}\n```')
+
+    assert result.passed is True
+    assert result.reason == "Fenced JSON."
+
+
+def test_evaluate_response_accepts_plain_fenced_output():
+    result = _judge('```\n{"passed": false, "reason": "Plain fence."}\n```')
+
+    assert result.passed is False
+    assert result.reason == "Plain fence."
+
+
+def test_evaluate_response_rejects_non_json_text():
+    with pytest.raises(json.JSONDecodeError):
+        _judge("This is not JSON at all.")
+
+
+def test_evaluate_response_does_not_extract_json_from_surrounding_prose():
+    with pytest.raises(json.JSONDecodeError):
+        _judge('Here is my verdict:\n```json\n{"passed": true, "reason": "x"}\n```\nThanks!')
