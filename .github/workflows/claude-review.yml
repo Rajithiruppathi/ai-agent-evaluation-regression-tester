@@ -69,7 +69,10 @@ jobs:
               messages=[{"role": "user", "content": prompt}]
           )
 
-          review_comment = response.content[0].text
+          review_comment = next(
+              block.text for block in response.content
+              if block.type == "text"
+          )
 
           url = f"https://api.github.com/repos/{repo}/issues/{pr_num}/comments"
           req = urllib.request.Request(
