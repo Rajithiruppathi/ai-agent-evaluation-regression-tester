@@ -1,0 +1,14 @@
+{
+  "refund_policy": {
+    "topic": "Refunds",
+    "policy": "Customers are eligible for a full refund if the request is made within 30 days of the purchase date. To qualify, the item must be unused and returned in its original condition and packaging."
+  },
+  "account_cancellation": {
+    "topic": "Account Cancellation",
+    "policy": "Customers can cancel their account at any time by going to the Account Settings page and selecting the 'Cancel Account' option. After cancellation, all account data is permanently deleted within 30 days."
+  },
+  "shipping_times": {
+    "topic": "Shipping Times",
+    "policy": "Standard shipping takes 3 to 5 business days. Customers who choose express shipping receive their order in 1 to 2 business days."
+  }
+}

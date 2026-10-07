@@ -4,7 +4,7 @@ on:
   pull_request:
     types: [opened, synchronize]
     branches:
-      - main
+      - master
 
 jobs:
   review:
@@ -64,12 +64,18 @@ jobs:
           """
 
           response = client.messages.create(
-              model="claude-3-5-sonnet-20241022",
-              max_tokens=1000,
+              model="claude-opus-5",
+              max_tokens=16000,
               messages=[{"role": "user", "content": prompt}]
           )
 
-          review_comment = response.content[0].text
+          review_comment = next(
+              (block.text for block in response.content if block.type == "text"),
+              None,
+          )
+
+          if review_comment is None:
+              raise RuntimeError("No text block in Claude review response")
 
           url = f"https://api.github.com/repos/{repo}/issues/{pr_num}/comments"
           req = urllib.request.Request(

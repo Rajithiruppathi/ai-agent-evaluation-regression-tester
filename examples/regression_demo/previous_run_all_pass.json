@@ -1,0 +1,26 @@
+[
+  {
+    "test_id": "TC-001",
+    "question": "What is your refund policy?",
+    "expected_answer": "We offer a full refund if you request it within 30 days of purchase, as long as the item is unused and in its original condition.",
+    "actual_response": "You can request a full refund within 30 days of your purchase date. To qualify, the item needs to be unused and returned in its original condition and packaging.\n\nLet me know if you'd like help starting a return!",
+    "passed": true,
+    "reason": "The response matches the expected 30-day full refund window and unused/original condition requirement, with only minor extra helpful detail."
+  },
+  {
+    "test_id": "TC-002",
+    "question": "How do I cancel my account?",
+    "expected_answer": "You can cancel your account anytime from the Account Settings page by clicking 'Cancel Account'. Your data will be deleted within 30 days of cancellation.",
+    "actual_response": "To cancel your account, just head to your **Account Settings** page and select the **\"Cancel Account\"** option. You can do this at any time.\n\nOne thing to keep in mind: after you cancel, all of your account data is permanently deleted within 30 days \u2014 so if there's anything you'd like to keep, be sure to save it before you cancel.",
+    "passed": true,
+    "reason": "The response conveys the same key facts: cancel anytime via Account Settings using 'Cancel Account', with data deleted within 30 days."
+  },
+  {
+    "test_id": "TC-003",
+    "question": "How long does shipping usually take?",
+    "expected_answer": "Standard shipping typically takes 3 to 5 business days, while express shipping takes 1 to 2 business days.",
+    "actual_response": "Shipping times depend on the option you choose at checkout:\n\n- **Standard shipping:** 3\u20135 business days\n- **Express shipping:** 1\u20132 business days\n\nLet me know if you'd like help with anything else!",
+    "passed": true,
+    "reason": "The response states the same shipping durations (3\u20135 business days standard, 1\u20132 express) as the expected answer."
+  }
+]
