@@ -58,4 +58,10 @@ def generate_response(question: str) -> str:
         system=system_prompt,
         messages=[{"role": "user", "content": question}],
     )
-    return next(block.text for block in response.content if block.type == "text")
+    text = next(
+        (block.text for block in response.content if block.type == "text"),
+        None,
+    )
+    if text is None:
+        raise RuntimeError("Claude application response contained no text block")
+    return text

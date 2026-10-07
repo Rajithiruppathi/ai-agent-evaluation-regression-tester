@@ -50,7 +50,12 @@ def evaluate_response(client, question: str, expected_answer: str, actual_respon
         messages=[{"role": "user", "content": user_message}],
     )
 
-    raw_text = next(block.text for block in response.content if block.type == "text")
+    raw_text = next(
+        (block.text for block in response.content if block.type == "text"),
+        None,
+    )
+    if raw_text is None:
+        raise RuntimeError("Claude judge response contained no text block")
     data = json.loads(_strip_code_fence(raw_text))
 
     return JudgeResult(**data)

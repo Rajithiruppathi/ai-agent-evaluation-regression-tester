@@ -86,6 +86,30 @@ def test_evaluate_response_rejects_invalid_structured_output():
         _judge('{"passed": "banana", "reason": "bad output"}')
 
 
+class _FakeThinkingBlock:
+    type = "thinking"
+    thinking = "internal reasoning"
+
+
+class _ThinkingOnlyMessages:
+    def create(self, **kwargs):
+        return type("Response", (), {"content": [_FakeThinkingBlock()]})()
+
+
+class _ThinkingOnlyClient:
+    messages = _ThinkingOnlyMessages()
+
+
+def test_evaluate_response_raises_clear_error_when_only_thinking_block():
+    with pytest.raises(RuntimeError, match="judge response contained no text block"):
+        evaluate_response(
+            _ThinkingOnlyClient(),
+            question="Irrelevant",
+            expected_answer="Irrelevant",
+            actual_response="Irrelevant",
+        )
+
+
 def test_evaluate_response_accepts_json_fenced_output():
     result = _judge('```json\n{"passed": true, "reason": "Fenced JSON."}\n```')
 

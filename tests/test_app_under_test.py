@@ -1,5 +1,28 @@
+import pytest
+
 import app_under_test
 import evaluator
+
+
+class _FakeThinkingBlock:
+    type = "thinking"
+    thinking = "internal reasoning"
+
+
+class _ThinkingOnlyMessages:
+    def create(self, **kwargs):
+        return type("Response", (), {"content": [_FakeThinkingBlock()]})()
+
+
+class _ThinkingOnlyClient:
+    messages = _ThinkingOnlyMessages()
+
+
+def test_generate_response_raises_clear_error_when_only_thinking_block(monkeypatch):
+    monkeypatch.setattr(app_under_test, "_get_client", lambda: _ThinkingOnlyClient())
+
+    with pytest.raises(RuntimeError, match="contained no text block"):
+        app_under_test.generate_response("Any question?")
 
 
 class _FakeTextBlock:
